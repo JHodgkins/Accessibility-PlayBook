@@ -9,6 +9,12 @@ Environment: macOS arm64, Node.js 22.14.0, Next.js 15.5.25, Nextra 4.6.1, React 
 Playwright Chromium 153. Browser checks use the production server, not a dev overlay.
 The complete repeatable command is `npm run check` after browser installation.
 
+Final local result: `npm install` succeeded with both patches applied and zero npm
+audit vulnerabilities. `npm run check` passed lint, the production build and search
+indexing, followed by **69 browser tests (54.9 seconds)**. Desktop, mobile and
+forced-colours screenshots were visually reviewed. The implementation and lockfile
+are recorded in local commit `f3a8703`; subsequent tracker updates record these results.
+
 - Canonical structure: all ten sections and required pages checked, plus the case study.
 - Content: 58 MDX pages reviewed for purpose, useful guidance, terminology and cross-links.
 - Component review: all six follow the template; form/dialog standards references use

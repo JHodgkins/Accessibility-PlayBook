@@ -18,7 +18,7 @@ reviewed.
 - [x] Run `npm install`.
 - [x] Run `npm run build` in the target development environment.
 - [ ] Resolve any framework/version warnings.
-- [ ] Commit lockfile.
+- [x] Commit lockfile.
 
 ## Phase 2 — Complete polished architecture
 
@@ -221,6 +221,9 @@ manual screen-reader, physical-device or actual browser-zoom review.
 
 Implementation and agent content review cover all phases. `docs/QA.md` records the
 browser checks, corrected theme failures, environment and manual handoff procedure.
+Final local validation passed: installation with zero audit vulnerabilities, lint,
+production build, search indexing and 69 browser tests. The implementation and
+lockfile were committed locally as `f3a8703`; no remote push was performed.
 The canonical structure now has 58 content pages including a supplementary case study.
 `REQUIREMENTS.md` records that addition; no canonical section or page was removed.
 
