@@ -1,0 +1,50 @@
+---
+title: Accessibility reporting
+description: Measure accessibility quality and organisational improvement.
+---
+
+
+# Accessibility reporting
+
+Useful measures should help leaders make decisions.
+
+Examples include:
+
+- number and severity of open barriers;
+- age and time to remediate;
+- repeated failure categories;
+- accessibility escape rate after release;
+- adoption of approved accessible components;
+- completion of lifecycle checks;
+- accessibility training or enablement coverage where it supports a clear outcome.
+
+Avoid vanity metrics such as raw automated issue counts without user-impact context.
+
+## Example accessibility release report
+
+**Audience:** Product owners, delivery managers, QA and risk owners  
+**Purpose:** Make a release decision from coverage and user impact.  
+**When to use:** Release readiness and post-release review.  
+**Owner:** Product / QA
+
+The following is a fictional report, not a conformance claim or an audit of this POC.
+
+| Field | Example release R-12 |
+| --- | --- |
+| Scope | Account registration and profile update, build example-42 |
+| Baseline | Organisation WCAG 2.2 AA target; agreed test matrix revision 3 |
+| Evidence | KEY-07, SR-09, ZOOM-03; automated run CI-42; UAT session summary |
+| Coverage | Normal/error/success journeys on agreed desktop combinations |
+| Fixed | A11Y-017 registration error recovery, independently retested |
+| Open | One Medium barrier in secondary export; accessible HTML alternative verified |
+| Not tested | Android TalkBack on profile update; assigned to mobile QA before release |
+| Exception | EX-04, authorised owner, review 9 October, expiry 16 October |
+| Decision | Hold until mobile coverage is completed; exception alone does not clear this gap |
+| Follow-up | Product owns the export fix; QA owns mobile evidence and regression review |
+
+The named release approver must update the decision after the hold condition is
+resolved, with date and evidence links. Report changes in coverage alongside changes
+in defect counts; a smaller count can reflect less testing rather than improvement.
+
+See [release gates](/delivery/release-gates), [risk acceptance](/delivery/risk-acceptance)
+and the [worked remediation case](/remediation/fix-examples).

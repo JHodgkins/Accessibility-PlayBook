@@ -1,0 +1,28 @@
+---
+title: Responsive design
+description: Ensure content remains usable as viewport size and zoom change.
+---
+
+# Responsive design
+
+**Audience:** Designers, Product, QA  
+**Purpose:** Ensure content remains usable as viewport size and zoom change.
+
+## Core guidance
+
+- Do not hide essential information solely because the viewport is narrow.
+- Avoid layouts that require unnecessary two-dimensional scrolling.
+- Check fixed and sticky elements do not obscure content at high zoom.
+
+## Handoff expectation
+
+Designs should communicate relevant states and expected behaviour clearly enough that
+development and QA do not need to infer the accessibility requirement after build.
+
+## Review the smallest usable layout
+
+Use a 320 CSS-pixel-wide layout as one reflow check. Verify headings, navigation, long links, fields and actions remain available. For essential wide data, contain horizontal scrolling within the table and document how keyboard users reach it. A screenshot alone cannot show whether focus or scrolling works.
+
+## Related guidance
+
+[Tables](/components/tables), [magnification and zoom](/testing/magnification-and-zoom), [mobile testing](/testing/mobile).

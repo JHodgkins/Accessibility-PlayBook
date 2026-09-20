@@ -1,0 +1,28 @@
+---
+title: Mobile accessibility
+description: Verify touch, orientation, screen-reader and responsive behaviour on mobile.
+---
+
+# Mobile accessibility
+
+**Audience:** QA, Accessibility Test Engineers, Developers, UAT  
+**Purpose:** Verify touch, orientation, screen-reader and responsive behaviour on mobile.
+
+## Baseline checks
+
+- controls have usable touch targets;
+- labels and states remain available to the mobile screen reader;
+- gestures have alternatives where required;
+- focus follows a meaningful order;
+- orientation changes do not remove necessary functionality;
+- dynamic updates remain understandable.
+
+## Mobile test record
+
+Copy the [shared test record](/resources/templates#method-test-record) for each
+scenario and add: Physical device and OS; browser/AT versions; portrait and landscape; text size; swipe and touch-exploration path; labels and state; target usability; gesture alternatives; outcome.
+
+Record pass, fail, blocked or not tested for each expected outcome. Include a build
+identifier and durable evidence link. Route failures through the
+[severity model](/remediation/severity-model), then repeat the failed steps and the
+surrounding journey after a fix.

@@ -1,0 +1,63 @@
+---
+title: Roles and responsibilities
+description: A shared accessibility responsibility model.
+---
+
+# Roles and responsibilities
+
+**Audience:** Sponsors, Product, Delivery, Design, Engineering, QA, Accessibility  
+**Purpose:** Make ownership explicit so accessibility does not become a QA-only responsibility.  
+**When to use:** Planning work, resolving ownership gaps and making release decisions.  
+**Owner:** Product / Accessibility
+
+| Role | Core responsibility |
+| --- | --- |
+| Executive sponsor | Provides authority, funding and escalation support |
+| Product owner | Ensures accessibility is represented in scope, priority and acceptance |
+| Business analyst | Converts user and accessibility needs into requirements |
+| Designer | Prevents barriers through accessible interaction and visual design |
+| Developer | Implements accessible behaviour and correct semantics |
+| QA | Verifies acceptance criteria and reports user-impacting failures |
+| Accessibility specialist | Provides expert guidance, complex evaluation and scalable enablement |
+| Design system | Builds accessibility into reusable components and patterns |
+| Delivery manager | Ensures checkpoints and evidence are completed |
+| UAT | Validates key journeys from a user-facing perspective |
+| Risk / compliance | Supports governance and exception handling |
+
+## Principle: specialists enable; teams own
+
+The accessibility specialist should not become the only person capable of finding or
+fixing accessibility problems. The operating model deliberately moves routine
+accessibility responsibility into ordinary product roles while retaining specialist
+support for complex decisions.
+
+## Decision ownership
+
+Use one accountable role for each decision. Responsible roles do the work; consulted
+roles contribute expertise; informed roles receive the decision and evidence. Names
+must be recorded on the work item; a role label alone cannot accept an exception.
+
+| Decision or deliverable | Accountable | Responsible | Consulted | Informed |
+| --- | --- | --- | --- | --- |
+| Product accessibility scope | Product owner | Business analyst | Accessibility, procurement, legal | Delivery team |
+| Design and content handoff | Design lead | Designers, content designers | Design system, accessibility | Engineering, QA |
+| Accessible implementation | Technical lead | Developers | Design system, accessibility | Product, QA |
+| Evaluation evidence | QA lead | QA and accessibility test engineers | Developers, UAT | Product, delivery |
+| Release with an exception | Authorised risk owner | Product owner | Accessibility, legal, QA | Sponsor, support |
+| Training and pattern improvements | Engineering or design lead | Learning team, design system | Accessibility, content design | Delivery teams |
+
+Architects must review platform constraints before procurement or implementation.
+Procurement must request supplier evidence and contractual remediation routes.
+Content designers own understandable labels, instructions and recovery messages.
+Learning teams should turn recurring failures into role-specific exercises, with
+practice and feedback rather than completion counts alone.
+
+### Example handoff
+
+For a registration form, the analyst records error-recovery criteria; the designer
+annotates the error summary; the developer links errors to fields; QA attaches a
+keyboard and screen-reader record. Product accepts only when the evidence matches
+the criteria, or routes an unresolved barrier through the exception process.
+
+See [lifecycle evidence](/operating-model/delivery-lifecycle),
+[release gates](/delivery/release-gates) and [templates](/resources/templates).

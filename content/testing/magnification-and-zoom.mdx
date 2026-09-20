@@ -1,0 +1,37 @@
+---
+title: Magnification and zoom
+description: Verify that content remains perceivable and operable when users enlarge it.
+---
+
+# Magnification and zoom
+
+**Audience:** QA, Accessibility Test Engineers, Developers, UAT  
+**Purpose:** Verify that content remains perceivable and operable when users enlarge it.
+
+## Baseline checks
+
+- 200% zoom;
+- 400% zoom at an appropriate viewport size;
+- reflow without loss of essential content;
+- no clipped labels, errors or controls;
+- visible keyboard focus;
+- fixed/sticky UI does not obscure the task;
+- target information does not require excessive panning between distant locations.
+
+## Magnification test record
+
+Copy the [shared test record](/resources/templates#method-test-record) for each
+scenario and add: Browser zoom and initial viewport; resulting CSS viewport; text-only enlargement if supported; OS magnifier settings; clipping and panning; sticky content; focused control visibility; final action reached.
+
+Record pass, fail, blocked or not tested for each expected outcome. Include a build
+identifier and durable evidence link. Route failures through the
+[severity model](/remediation/severity-model), then repeat the failed steps and the
+surrounding journey after a fix.
+
+## Reproducible setup
+
+Start with a 1280 CSS-pixel-wide desktop viewport at 100%, then test 200% and 400%
+browser zoom. At 400%, the effective width is approximately 320 CSS pixels. Record
+the actual value; display scaling and browser chrome can affect it. Separately test
+200% text enlargement and OS magnification. A narrow viewport is a useful reflow
+proxy, but is not evidence that browser zoom or magnifier tracking has been tested.

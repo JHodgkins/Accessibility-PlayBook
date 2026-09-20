@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+public/_pagefind/
+playwright-report/
+test-results/
+.DS_Store
+.env*
+!.env.example

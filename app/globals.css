@@ -1,0 +1,83 @@
+:root {
+  --playbook-accent: #2457a6;
+}
+
+main a {
+  color: var(--playbook-accent);
+}
+
+.dark {
+  --playbook-accent: #9bc4ff;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+.playbook-lede {
+  font-size: 1.2rem;
+  max-width: 70ch;
+}
+
+.playbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.playbook-card {
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.playbook-card h2,
+.playbook-card h3 {
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.audience-note {
+  border-inline-start: 0.25rem solid var(--playbook-accent);
+  padding: 0.75rem 1rem;
+  background: color-mix(in srgb, var(--playbook-accent) 7%, transparent);
+  margin: 1rem 0 1.5rem;
+}
+
+.lifecycle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.75rem;
+  list-style-position: inside;
+  padding: 0;
+}
+
+.lifecycle li {
+  border: 1px solid currentColor;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+@media (forced-colors: active) {
+  main a {
+    color: LinkText;
+  }
+  .playbook-card,
+  .audience-note {
+    border-color: CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,88 @@
+---
+title: Templates
+description: Reusable structures for accessibility work.
+---
+
+# Accessibility templates
+
+**Audience:** QA, developers and accessibility specialists  
+**Purpose:** Produce evidence that can be repeated and reviewed.  
+**When to use:** Each planned test scenario and defect retest.  
+**Owner:** QA / Accessibility
+
+## Defect template
+
+**Summary:**  
+**Affected journey:**  
+**Affected users:**  
+**Environment / AT combination:**  
+**Steps to reproduce:**  
+**Actual result:**  
+**Expected accessible result:**  
+**User impact:**  
+**Severity:**  
+**Relevant standards:**  
+**Suggested remediation:**  
+**Evidence:**
+
+## Component specification template
+
+1. Overview
+2. User needs
+3. Accessibility requirements
+4. Visual behaviour
+5. Keyboard behaviour
+6. Screen-reader behaviour
+7. Magnification and zoom
+8. Voice control
+9. Developer implementation
+10. Code example
+11. Testing procedure
+12. Common failures
+13. Remediation
+14. Acceptance criteria
+15. Standards mapping
+16. Related guidance
+
+## Risk acceptance template
+
+Use the fields described in [Risk acceptance](/delivery/risk-acceptance).
+
+## Method test record
+
+```text
+Test ID and linked acceptance criterion:
+Journey, page and component state:
+Build / commit / environment:
+Date and tester:
+OS, browser and AT versions:
+Settings, viewport and zoom:
+Test method and exact steps:
+Expected accessible outcome:
+Observed outcome and evidence:
+Result: pass / fail / blocked / not tested
+Defect and severity, if applicable:
+Retest build, result and reviewer:
+```
+
+Add the method-specific fields from [keyboard](/testing/keyboard),
+[screen-reader](/testing/screen-readers), [magnification](/testing/magnification-and-zoom)
+and [mobile](/testing/mobile) guidance. Do not store credentials or identifiable user
+research data in a general ticket.
+
+### Example completed keyboard record
+
+Test KEY-07; criterion REG-12 error recovery; build example-42; tester QA reviewer;
+20 September 2026; desktop browser version recorded in the release evidence.
+Tab to email, enter malformed data, submit, then follow the error-summary link.
+Expected: focus reaches the labelled invalid field and its visible correction text.
+Observed: focus reaches email; the error is visible and associated; other values persist.
+Result: illustrative pass. This example is not an executed test of the playbook site.
+
+## Release review agenda
+
+1. Confirm release scope and the evidence build.
+2. Review coverage, failures and untested conditions.
+3. Review user impact, workaround evidence and exception expiry.
+4. Record release/hold, named authority and follow-up owners.
+5. Publish the [release report](/delivery/reporting) to the delivery team.

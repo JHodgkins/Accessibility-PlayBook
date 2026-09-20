@@ -1,0 +1,43 @@
+---
+title: Escalation and exceptions
+description: How unresolved accessibility risk is handled.
+---
+
+
+# Escalation and exceptions
+
+An exception is not a way to make an accessibility defect disappear.
+
+A useful exception record identifies:
+
+- the barrier;
+- the affected users and journeys;
+- severity and business impact;
+- available workaround, if any;
+- why remediation cannot occur before release;
+- remediation owner and target date;
+- authorised approver;
+- review or expiry date.
+
+Exceptions should be visible, time-bound and reviewed. Repeated exceptions for the
+same pattern are a signal that a systemic fix is needed.
+
+## Example review and expiry
+
+**Audience:** Product owners, delivery managers and authorised risk owners  
+**Purpose:** Keep temporary release decisions accountable.
+
+Illustrative record EX-04 concerns a secondary export whose column headings are
+missing. Product proposes an accessible HTML view as a temporary alternative. QA
+must verify that it supplies the same information without extra cost or permissions.
+The risk owner may approve only within the organisation's delegated authority.
+
+- Decision: permit one release on 5 October 2026, with the defect still open.
+- Remediation owner: reporting team lead; fix due 12 October.
+- Review: 9 October, including use of the alternative and any new user impact.
+- Expiry: 16 October; no automatic extension.
+- Closure: QA retests the export and records evidence; the approver closes the exception.
+
+If the workaround fails or the impact changes, escalate immediately. If the fix misses
+expiry, block subsequent affected releases pending a fresh authorised decision.
+An accepted risk does not establish compliance. See [risk acceptance](/delivery/risk-acceptance).

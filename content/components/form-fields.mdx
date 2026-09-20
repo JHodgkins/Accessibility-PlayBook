@@ -1,0 +1,222 @@
+---
+title: Form fields
+description: Deep-dive accessible form-field specification.
+---
+
+
+# Form fields
+
+**Audience:** Designers, Developers, QA, Product  
+**Purpose:** Define accessible behaviour for text-entry form controls.  
+**When to use:** Design, implementation, code review, testing and remediation.  
+**Owner:** Accessibility / Design System
+
+## Overview
+
+This specification covers single-line text inputs. Use it with the form's submission,
+validation and recovery flow; a correctly labelled field alone does not make a form usable.
+Use native select, checkbox and radio patterns for choices rather than repurposing text inputs.
+
+## User needs
+
+A user should be able to determine:
+
+- what information the field requests;
+- whether the field is required;
+- any formatting or input instructions;
+- whether a value is invalid;
+- what needs to change to correct an error.
+
+Those needs must remain available to keyboard users, screen-reader users, people
+using magnification and people using voice input.
+
+## Accessibility requirements
+
+A text field **must**:
+
+- have a visible label;
+- expose an accessible name;
+- associate the label programmatically with the field;
+- expose required and invalid states where applicable;
+- associate relevant instructions and errors programmatically;
+- provide a visible focus indicator;
+- remain usable when text is enlarged or the page is zoomed;
+- avoid relying on placeholder text as the only label.
+
+## Visual behaviour
+
+The label must remain visible after typing. Show “required” in text where applicable,
+and describe errors with words as well as any colour or icon. Instructions should appear
+before users need them. Fields should fit their container, and focus must remain visible
+against both the field and surrounding background. Do not disable paste or password managers.
+
+## Keyboard behaviour
+
+A standard text field should use native keyboard behaviour.
+
+- `Tab` moves focus to the field according to the document's logical order.
+- Typing enters content.
+- `Shift+Tab` moves to the previous focusable element.
+- No additional keyboard handling should be added unless the control is genuinely custom.
+
+## Screen-reader expectations
+
+When the field receives focus, the user should be able to determine its:
+
+- accessible name;
+- role;
+- required state, when applicable;
+- invalid state, when applicable;
+- relevant instructions or error information.
+
+Exact spoken output varies by browser, screen reader, verbosity settings and
+interaction mode. Treat example announcements as illustrative, not normative.
+
+Example:
+
+> “Email address, edit, required.”
+
+## Magnification and zoom
+
+At increased zoom or magnification:
+
+- the label must remain visually associated with the field;
+- error and instruction text must not be clipped or obscured;
+- focus must remain visible;
+- the user should not need to move between distant parts of the viewport to understand one field.
+
+## Voice control
+
+Where visible labels are used for voice targeting, the programmatic name must
+include or match the visible label so the control can be identified predictably.
+
+## Developer implementation
+
+Prefer native HTML labels. The `for` and `id` relationship makes the visible label
+the input's name and enlarges its clickable area. IDs must be unique on the page.
+Use appropriate `autocomplete` tokens for personal information. Validate on the server
+as well as in the browser; accessibility attributes do not validate input.
+
+## Code examples
+
+```html
+<label for="email">Email address (required)</label>
+<input
+  id="email"
+  name="email"
+  type="email"
+  autocomplete="email"
+  required
+  aria-describedby="email-hint"
+/>
+<p id="email-hint">We will send the receipt to this address.</p>
+```
+
+### Invalid state example
+
+```html
+<label for="email">Email address (required)</label>
+<input
+  id="email"
+  name="email"
+  type="email"
+  autocomplete="email"
+  required
+  aria-invalid="true"
+  aria-describedby="email-hint email-error"
+/>
+<p id="email-hint">We will send the receipt to this address.</p>
+<p id="email-error">Enter an email address in the format name@example.com.</p>
+```
+
+`aria-invalid="true"` communicates state. `aria-describedby` provides the
+relationship to the error text. Neither replaces a visible error message.
+
+These are alternative states of the same field, not two controls to paste together.
+Set the invalid state after validation finds a problem and remove it when corrected.
+After a failed submission, focus a linked error summary or the first invalid field
+according to the documented form design. Do not move focus on every keystroke.
+
+## Common failures
+
+| Failure | Typical user impact |
+| --- | --- |
+| No programmatic label | Screen-reader and voice-control users may not know what to enter |
+| Placeholder used as label | Label disappears when typing and may be difficult to perceive |
+| Error shown only by colour | Users who cannot perceive the colour difference may miss the error |
+| Error not associated with field | Screen-reader user may find an invalid field without knowing why |
+| Focus style removed | Keyboard user may lose their location |
+
+## Testing procedure
+
+### Keyboard
+
+1. Navigate to the field using `Tab`.
+2. Confirm focus is visible.
+3. Enter and edit text.
+4. Trigger an error.
+5. Confirm the keyboard remains usable and focus order remains logical.
+
+### Screen reader
+
+1. Navigate to the field.
+2. Confirm the field's name and role can be determined.
+3. Confirm required state is available when applicable.
+4. Trigger validation.
+5. Confirm invalid state and error information can be determined.
+
+### Zoom and reflow
+
+1. Test at 200% zoom.
+2. Test at 400% zoom at an appropriate viewport width.
+3. Confirm label, field, instructions and error remain understandable together.
+4. Confirm fixed content does not cover the field or error.
+
+### Automated checks
+
+Automated tools can often identify missing labels, invalid ARIA relationships and
+some contrast issues. They cannot determine whether all instructions are clear,
+whether error recovery is understandable or whether the overall form experience is usable.
+
+## Remediation
+
+Fix the shared field component first, then check every consuming form. Preserve entered
+values on failure. Test an empty submission, malformed input, correction and successful
+submission. Close the defect only when both the field and the recovery journey pass;
+record evidence using the [defect template](/resources/templates).
+
+## Acceptance criteria
+
+- Given I navigate by keyboard, when focus reaches the email field, then a visible focus indicator identifies the field.
+- Given I use a screen reader, when focus reaches the field, then I can determine the label and required state.
+- When invalid data is submitted, the error is visible and programmatically associated with the field.
+- At 400% zoom, the field, label and error can be used without loss of essential information.
+
+## Standards mapping
+
+The following are starting points for this component, not a complete conformance assessment.
+WCAG links target [WCAG 2.2](https://www.w3.org/TR/WCAG22/); EN clauses refer specifically
+to [EN 301 549 V3.2.1, chapter 9 (PDF)](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/03.02.01_60/en_301549v030201p.pdf).
+
+| Review area | WCAG 2.2 | EN V3.2.1 clause |
+| --- | --- | --- |
+| Label relationship | [1.3.1](https://www.w3.org/TR/WCAG22/#info-and-relationships) | 9.1.3.1 |
+| Personal input purpose | [1.3.5](https://www.w3.org/TR/WCAG22/#identify-input-purpose) | 9.1.3.5 |
+| Reflow | [1.4.10](https://www.w3.org/TR/WCAG22/#reflow) | 9.1.4.10 |
+| Keyboard operation | [2.1.1](https://www.w3.org/TR/WCAG22/#keyboard) | 9.2.1.1 |
+| Visible focus | [2.4.7](https://www.w3.org/TR/WCAG22/#focus-visible) | 9.2.4.7 |
+| Visible label in name | [2.5.3](https://www.w3.org/TR/WCAG22/#label-in-name) | 9.2.5.3 |
+| Errors and correction | [3.3.1](https://www.w3.org/TR/WCAG22/#error-identification), [3.3.3](https://www.w3.org/TR/WCAG22/#error-suggestion) | 9.3.3.1, 9.3.3.3 |
+| Instructions | [3.3.2](https://www.w3.org/TR/WCAG22/#labels-or-instructions) | 9.3.3.2 |
+| Names and states | [4.1.2](https://www.w3.org/TR/WCAG22/#name-role-value) | 9.4.1.2 |
+
+Also review WCAG 2.2 [2.4.11](https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum)
+for sticky content covering focus. This newer criterion has no direct counterpart in
+EN V3.2.1. See [standards scope](/standards/en-301-549) before applying these mappings.
+
+## Related guidance
+
+- [Form design](/design/forms) and [error handling](/design/error-handling)
+- [Accessible names](/development/accessible-names)
+- [Keyboard testing](/testing/keyboard) and [screen-reader testing](/testing/screen-readers)
+- [Acceptance criteria](/delivery/acceptance-criteria)

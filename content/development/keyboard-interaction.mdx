@@ -1,0 +1,28 @@
+---
+title: Keyboard interaction
+description: Ensure all functionality can be reached and operated without a pointing device.
+---
+
+# Keyboard interaction
+
+**Audience:** Developers, Technical leads, QA  
+**Purpose:** Ensure all functionality can be reached and operated without a pointing device.
+
+## Principles
+
+- Use native keyboard behaviour where available.
+- Provide logical focus order.
+- Avoid keyboard traps and unexpected focus movement.
+
+## Review question
+
+Can the implementation expose the correct purpose, state and interaction using native
+platform semantics before additional scripting or ARIA is introduced?
+
+## Test the complete sequence
+
+Do not use positive tabindex values to repair a visual ordering problem; correct the document order. Native buttons support Enter and Space, while links activate with Enter. Composite widgets such as tabs use arrow keys internally. Check escape routes, disabled states, sticky obstructions and focus restoration in both directions.
+
+## Related guidance
+
+[Buttons](/components/buttons), [tabs](/components/tabs), [keyboard procedure](/testing/keyboard).

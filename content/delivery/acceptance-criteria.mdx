@@ -1,0 +1,55 @@
+---
+title: Accessibility acceptance criteria
+description: Make accessibility testable within ordinary product work.
+---
+
+# Accessibility acceptance criteria
+
+**Audience:** Product owners, business analysts, designers, developers and QA  
+**Purpose:** Agree observable outcomes before implementation.  
+**When to use:** Refinement, handoff, evaluation and acceptance.  
+**Owner:** Product / QA
+
+Good acceptance criteria describe user-observable or testable outcomes rather than
+simply saying “meets WCAG”.
+
+## Form field example
+
+- Given I navigate by keyboard, when focus reaches the field, then the field has a visible focus indicator.
+- Given I use a screen reader, when focus reaches the field, then I can determine its label and required state.
+- When validation fails, the visible error is programmatically associated with the affected field.
+- At 400% zoom, the field, label, instructions and error remain usable without loss of essential information.
+
+## Modal example
+
+- When the modal opens, focus moves to a documented logical target inside it.
+- The modal exposes an accessible name.
+- Keyboard navigation cannot move into obscured background controls while the modal is active.
+- When the modal closes, focus returns to a logical location.
+
+## Template
+
+Use:
+
+> **Given** [user/context], **when** [interaction/state], **then** [observable accessible outcome].
+
+Criteria should be specific enough that product, engineering and QA can agree on the
+same expected result.
+
+## Agree and verify criteria
+
+Each criterion must identify the interaction state and how it will be evaluated.
+Avoid treating one component criterion as coverage for the full journey. Include
+loading, invalid input, cancellation and recovery as well as successful completion.
+
+| Criterion | Verification | Evidence owner |
+| --- | --- | --- |
+| Invalid email can be found and corrected without a pointer | Submit, navigate summary, edit, resubmit | QA |
+| Dialog cancellation preserves the current task | Open, cancel, check data and focus | Developer and QA |
+| All actions remain reachable when enlarged | 200% and 400% zoom with keyboard traversal | QA |
+
+During refinement, QA should demonstrate that each criterion has a repeatable test.
+At acceptance, Product reviews linked results and unresolved defects. A blocked test
+must remain visible in the [release report](/delivery/reporting).
+See [form fields](/components/form-fields), [modal dialogs](/components/modal-dialogs)
+and the [test record](/resources/templates#method-test-record).

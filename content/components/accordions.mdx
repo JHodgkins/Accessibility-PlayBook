@@ -1,0 +1,101 @@
+---
+title: Accordions
+description: Specify expandable sections with predictable headings and state.
+---
+
+# Accordions
+
+**Audience:** Designers, Developers, QA  
+**Purpose:** Specify expandable sections with predictable headings and state.  
+**When to use:** Component design, implementation, review and testing.  
+**Owner:** Accessibility / Design System
+
+## Overview
+
+An accordion groups related disclosures. Keep essential instructions visible rather than hiding information everyone needs. Independent native details elements are often sufficient for simple disclosure content.
+
+## User needs
+
+Users need to find each topic, know whether it is open and read its contents without losing their position.
+
+## Accessibility requirements
+
+For a custom accordion, place a native button inside a heading. Connect it to a uniquely identified panel and synchronise expanded state with visibility. Hidden panels must not contain reachable controls.
+
+## Visual behaviour
+
+Use a visible expanded/collapsed cue in addition to colour. The heading and trigger must remain recognisable. Opening a section must not move focus unexpectedly.
+
+## Keyboard behaviour
+
+Tab reaches each header button. Enter and Space toggle its panel. Expanded panel controls follow in document order. Arrow-key shortcuts are optional; if implemented, document and test them consistently.
+
+## Screen-reader behaviour
+
+Expose the header name, button role and expanded state. Headings should use the correct document level. Avoid creating a region landmark for every panel when that would clutter landmark navigation.
+
+## Magnification and zoom
+
+Let headings wrap and expanded content grow naturally. Avoid animated fixed-height panels that clip enlarged content.
+
+## Voice-control considerations
+
+Use the visible section title as the button name; avoid an icon with an unrelated name such as “chevron”.
+
+## Developer implementation
+
+The following single section can be repeated with unique IDs. This is a custom heading/button pattern; native `details` and `summary` provide an alternative without custom toggle scripting.
+
+## Code examples
+
+```html
+<h3><button type="button" id="delivery-heading"
+  aria-expanded="false" aria-controls="delivery-panel">Delivery options</button></h3>
+<div id="delivery-panel" hidden>
+  <p>Standard delivery takes three working days.</p>
+</div>
+<script>
+  const trigger = document.querySelector('#delivery-heading');
+  const panel = document.querySelector('#delivery-panel');
+  trigger.addEventListener('click', () => {
+    const expanded = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!expanded));
+    panel.hidden = expanded;
+  });
+</script>
+```
+
+The button supplies keyboard handling. The hidden attribute removes collapsed content from display and accessibility navigation; expanded state changes in the same operation.
+
+## Testing procedure
+
+1. Find headers using heading navigation.
+2. Toggle with Enter and Space and verify the exposed state.
+3. Tab through expanded content and confirm collapsed controls are skipped.
+4. Reopen several sections and check their state independently.
+5. Repeat with long titles, zoom and a screen reader.
+
+## Common failures
+
+State and panel visibility disagree; headers are clickable divs; collapsed content remains focusable; an expanding panel steals focus.
+
+## Remediation
+
+Make visibility and state derive from one state value. Remove height-only hiding. Test focus if another action collapses a panel while focus is inside it.
+
+## Acceptance criteria
+
+- Every section has a meaningful heading and operable trigger.
+- Expanded state always matches content visibility.
+- Hidden content cannot receive focus.
+- Toggling keeps focus on the trigger.
+
+## Standards mapping
+
+Review [1.3.1](https://www.w3.org/TR/WCAG22/#info-and-relationships), [2.1.1](https://www.w3.org/TR/WCAG22/#keyboard) and [4.1.2](https://www.w3.org/TR/WCAG22/#name-role-value) in context. These are relevant checks, not an exhaustive
+conformance claim. See [EN version and scope](/standards/en-301-549) for the separate
+European standard baseline.
+
+## Related guidance
+
+[WAI accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/), [buttons](/components/buttons), [focus management](/development/focus-management), [screen-reader testing](/testing/screen-readers).

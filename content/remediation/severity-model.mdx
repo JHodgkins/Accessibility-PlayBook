@@ -1,0 +1,68 @@
+---
+title: Severity model
+description: Prioritise accessibility defects by real user and journey impact.
+---
+
+# Accessibility severity model
+
+**Audience:** QA, Product, Accessibility, Engineering, Delivery  
+**Purpose:** Create consistent prioritisation without equating WCAG level with business severity.  
+**When to use:** Defect triage, prioritisation and release review.  
+**Owner:** Product / QA, with Accessibility consulted
+
+## Critical
+
+Prevents a disabled user completing a core or safety/business-critical journey and no
+reasonable workaround exists.
+
+**Example:** A keyboard user cannot activate the only control that submits a payment.
+
+## High
+
+Causes a major loss of functionality or independence. A workaround may exist but is
+difficult, unreliable or requires substantial additional effort.
+
+**Example:** A modal traps screen-reader focus away from the controls needed to continue.
+
+## Medium
+
+Creates a meaningful accessibility barrier but the task remains achievable with
+moderate additional effort or an effective workaround.
+
+**Example:** Error text is not programmatically associated with a field but an error
+summary clearly links back to the field.
+
+## Low
+
+Creates limited friction, inconsistency or a lower-impact issue that does not
+materially block the task.
+
+## Severity decision prompts
+
+Ask:
+
+- Which users are affected?
+- Is a core journey blocked?
+- Is functionality completely unavailable or only harder?
+- Is there a reliable workaround?
+- How frequently will users encounter the barrier?
+- Does it create safety, financial, legal or privacy consequences?
+- Is the problem systemic across many components or pages?
+
+WCAG conformance level is relevant context, but it should not be the sole severity
+algorithm.
+
+## Triage and review
+
+QA proposes severity with a reproducible user-impact statement. Product confirms
+journey criticality and the accessibility specialist reviews disputed or unfamiliar
+barriers. Record the rationale and any disagreement; escalate rather than silently
+lowering severity to meet a release date.
+
+Severity describes impact. Priority adds scheduling, reach and dependencies. A Low
+severity defect can still fail an applicable requirement and must have an owner.
+Validate workarounds with the relevant access method; “ask someone else” does not
+preserve independent access. Reassess when new evidence changes the impact.
+
+See the [worked defect](/remediation/fix-examples), [release gates](/delivery/release-gates)
+and [risk acceptance](/delivery/risk-acceptance).

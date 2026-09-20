@@ -1,0 +1,29 @@
+---
+title: Common failures
+description: Recurring accessibility defect patterns.
+---
+
+
+# Common failures
+
+Common recurring defects include:
+
+- controls without meaningful accessible names;
+- keyboard-inoperable custom widgets;
+- focus moving unexpectedly or becoming lost;
+- validation errors that are only visual;
+- low contrast;
+- content clipping at high zoom;
+- ARIA states that do not match the visible state;
+- dynamic status changes that are not communicated.
+
+Repeated failures should trigger a systemic response: update a component, pattern,
+lint rule, training module or testing control rather than fixing each occurrence in isolation.
+
+**Audience:** QA, developers, designers and Product  
+**Purpose:** Recognise recurring barriers and route corrective work.
+
+Use [severity](/remediation/severity-model) to describe impact,
+[fix examples](/remediation/fix-examples) to correct the root cause, and
+[retesting](/remediation/retesting) to verify the outcome. Record which consumers
+share the defect so a component fix does not leave older implementations behind.

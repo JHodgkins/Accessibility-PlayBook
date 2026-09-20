@@ -1,0 +1,28 @@
+---
+title: Semantic HTML
+description: Use native elements that already expose appropriate roles and behaviour.
+---
+
+# Semantic HTML
+
+**Audience:** Developers, Technical leads, QA  
+**Purpose:** Use native elements that already expose appropriate roles and behaviour.
+
+## Principles
+
+- Choose the HTML element that matches the control's purpose.
+- Prefer `<button>` for actions and links for navigation.
+- Do not recreate native semantics with generic containers unless necessary.
+
+## Review question
+
+Can the implementation expose the correct purpose, state and interaction using native
+platform semantics before additional scripting or ARIA is introduced?
+
+## Choose structure by meaning
+
+Use headings to organise content, lists for related items and tables for data relationships. Avoid choosing a heading level for its font size. A nav region identifies navigation, and one main region identifies the page task. Inspect the resulting document structure after responsive and component rendering, not only the source template.
+
+## Related guidance
+
+[Tables](/components/tables), [accessible names](/development/accessible-names), [screen-reader testing](/testing/screen-readers).

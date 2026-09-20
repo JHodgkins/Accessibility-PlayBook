@@ -1,0 +1,75 @@
+---
+title: Fix examples
+description: Example before-and-after remediation patterns.
+---
+
+
+# Fix examples
+
+## Missing form label
+
+### Problem
+
+```html
+<span>Email address</span>
+<input type="email">
+```
+
+The visible text is not programmatically associated with the input.
+
+### Remediation
+
+```html
+<label for="email">Email address</label>
+<input id="email" type="email">
+```
+
+## Clickable generic element
+
+### Problem
+
+```html
+<div onclick="save()">Save</div>
+```
+
+The element does not receive native button semantics or keyboard behaviour.
+
+### Remediation
+
+```html
+<button type="button">Save</button>
+```
+
+Prefer correcting the root semantic issue before adding ARIA and custom keyboard
+handlers.
+
+## Worked case: registration error recovery
+
+**Audience:** Developers, QA, Product and Accessibility  
+**Purpose:** Follow a barrier from discovery to verified closure.
+
+This fictional case illustrates the workflow; it is not a test result for this site.
+
+1. **Find:** In build example-41, submit an invalid email using a keyboard and screen
+   reader. A red message appears, but focus stays on Submit and no error is announced.
+2. **Record:** Defect A11Y-017 links to registration criterion REG-12, exact environment
+   versions, reproduction steps and a recording without personal information.
+3. **Assess:** The user cannot readily discover what to correct. Product and QA assign
+   High because account creation is significantly obstructed; they document the
+   unreliable workaround of searching the page. Severity is based on this journey,
+   not automatically on the criterion number.
+4. **Trace:** Review WCAG 3.3.1 and 3.3.3 for error content, 1.3.1 for relationships,
+   and 4.1.2 for the invalid state against the [form-field specification](/components/form-fields).
+5. **Fix:** Add a visible error summary with links to invalid fields; focus the summary
+   on failed submission. Link inline errors using `aria-describedby`, set invalid
+   state and preserve values. Correct the shared field component and both consumers.
+6. **Retest:** In build example-42, repeat the original failure, follow the summary link,
+   correct the value and submit successfully. Check keyboard, screen reader, 400%
+   zoom, multiple errors and a clean first submission. Attach observed outcomes.
+7. **Release:** QA closes the defect after review; Product records it as fixed in the
+   [release report](/delivery/reporting). A scanner result alone cannot close it.
+8. **Prevent recurrence:** Add an interaction regression test, update the design-system
+   error pattern and use the case in engineer/QA training.
+
+See [retesting](/remediation/retesting) for scope and [templates](/resources/templates)
+for the reusable record.

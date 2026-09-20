@@ -1,0 +1,35 @@
+{
+  "name": "accessibility-playbook-poc",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "patch-package --error-on-fail",
+    "dev": "next",
+    "build": "next build && pagefind --site .next/server/app --output-path public/_pagefind",
+    "start": "next start",
+    "lint:content": "node scripts/check-content.mjs",
+    "lint": "eslint . && npm run lint:content",
+    "test:a11y": "playwright test",
+    "check": "npm run lint && npm run build && npm run test:a11y"
+  },
+  "dependencies": {
+    "next": "15.5.25",
+    "nextra": "4.6.1",
+    "nextra-theme-docs": "4.6.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.25",
+    "pagefind": "^1.5.2",
+    "patch-package": "^8.0.1"
+  },
+  "overrides": {
+    "zod": "4.3.6",
+    "postcss": "^8.5.23",
+    "@xmldom/xmldom": "^0.9.12"
+  }
+}

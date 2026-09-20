@@ -1,0 +1,80 @@
+---
+title: Accessibility Playbook
+description: A practical accessibility operating model for product delivery teams.
+---
+
+
+# Accessibility Playbook
+
+**Audience:** All product-delivery roles  
+**Purpose:** Find practical guidance for accessible delivery.  
+**When to use:** Starting a task or reviewing the playbook.  
+**Owner:** Accessibility capability
+
+<div className="playbook-lede">
+A proof-of-concept for turning accessibility expertise into a repeatable way of
+designing, building, testing, releasing and improving digital products.
+</div>
+
+<div className="audience-note">
+<strong>POC intent:</strong> This site demonstrates the structure and depth of a
+living organisational accessibility playbook. It is not legal advice and does
+not claim that following a checklist alone establishes conformance.
+</div>
+
+## Start with your role
+
+<div className="playbook-grid">
+  <div className="playbook-card">
+    <h3>Product and delivery</h3>
+    <p>Understand ownership, lifecycle checkpoints, Definition of Done, release gates and risk acceptance.</p>
+    <a href="/operating-model">Explore the operating model</a>
+  </div>
+  <div className="playbook-card">
+    <h3>Design</h3>
+    <p>Use practical guidance for focus, forms, responsive behaviour, error handling and component expectations.</p>
+    <a href="/design">Explore design guidance</a>
+  </div>
+  <div className="playbook-card">
+    <h3>Development</h3>
+    <p>Apply semantic HTML, accessible names, keyboard behaviour, ARIA and focus management correctly.</p>
+    <a href="/development">Explore development guidance</a>
+  </div>
+  <div className="playbook-card">
+    <h3>Testing and QA</h3>
+    <p>Use repeatable keyboard, screen-reader, magnification, mobile and automated testing approaches.</p>
+    <a href="/testing">Explore testing guidance</a>
+  </div>
+</div>
+
+## How the pieces fit together
+
+The playbook connects organisational intent with practical delivery:
+
+1. **Standards** establish the accessibility baseline.
+2. **The operating model** defines who is responsible and when accessibility work happens.
+3. **Design and development guidance** help teams prevent defects.
+4. **Component specifications** define expected accessible behaviour.
+5. **Testing guidance** explains how to verify that behaviour.
+6. **Remediation guidance** helps teams prioritise and fix failures.
+7. **Delivery controls** connect accessibility to acceptance, release, risk and reporting.
+8. **Resources** make the approach repeatable through templates, tools and checklists.
+
+## Featured POC deep dives
+
+See [Building the playbook](/getting-started/case-study) for the architecture, design decisions and review limits.
+
+- [Form fields](/components/form-fields) — complete design, implementation, assistive-technology, testing and remediation example.
+- [Modal dialogs](/components/modal-dialogs) — a more complex focus and interaction example.
+- [Delivery lifecycle](/operating-model/delivery-lifecycle) — where accessibility activities fit from discovery to post-release.
+- [Severity model](/remediation/severity-model) — prioritisation based on user and journey impact.
+- [Acceptance criteria](/delivery/acceptance-criteria) — examples that make accessibility testable in ordinary delivery work.
+
+## Playbook principles
+
+- Accessibility is a **shared delivery responsibility**, supported by specialists.
+- Preventing defects is preferable to finding them late.
+- Automated testing is useful, but **does not replace manual evaluation**.
+- Native semantics are preferred before ARIA.
+- Severity is driven by **user impact and task impact**, not only by the WCAG level attached to a defect.
+- Guidance should be reusable, role-aware and easy to maintain.

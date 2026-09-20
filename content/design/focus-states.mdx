@@ -1,0 +1,28 @@
+---
+title: Focus states
+description: Make keyboard location easy to perceive and understand.
+---
+
+# Focus states
+
+**Audience:** Designers, Product, QA  
+**Purpose:** Make keyboard location easy to perceive and understand.
+
+## Core guidance
+
+- Interactive controls must have a visible focus indicator.
+- Focus styling should remain visible against adjacent backgrounds.
+- Do not remove browser focus indication unless an accessible replacement is provided.
+
+## Handoff expectation
+
+Designs should communicate relevant states and expected behaviour clearly enough that
+development and QA do not need to infer the accessibility requirement after build.
+
+## Specify focus across states
+
+Show the keyboard focus treatment for default, selected, error and dark-background contexts. A selected tab still needs a separate focus indicator. Check the outline is not clipped by overflow or covered by sticky headers. Ask engineering to demonstrate backwards as well as forwards keyboard travel.
+
+## Related guidance
+
+[Tabs](/components/tabs), [keyboard testing](/testing/keyboard), [responsive design](/design/responsive-design).

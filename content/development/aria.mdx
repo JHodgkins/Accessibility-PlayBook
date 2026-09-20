@@ -1,0 +1,28 @@
+---
+title: WAI-ARIA
+description: Use ARIA to supplement semantics when native HTML is insufficient.
+---
+
+# WAI-ARIA
+
+**Audience:** Developers, Technical leads, QA  
+**Purpose:** Use ARIA to supplement semantics when native HTML is insufficient.
+
+## Principles
+
+- Prefer native HTML before ARIA.
+- Do not add roles or states that contradict native semantics.
+- Keep ARIA states synchronised with visual and interaction state.
+
+## Review question
+
+Can the implementation expose the correct purpose, state and interaction using native
+platform semantics before additional scripting or ARIA is introduced?
+
+## Review behaviour before adding roles
+
+Adding role="button" to a div does not supply keyboard focus or activation. Likewise, aria-expanded does not show or hide content. Start with native elements; when a custom widget is necessary, implement its focus and keyboard model and keep state changes atomic. Never hide an ancestor of the currently focused element from assistive technology.
+
+## Related guidance
+
+[Accordions](/components/accordions), [tabs](/components/tabs), [WAI-ARIA reference](https://www.w3.org/TR/wai-aria-1.2/).

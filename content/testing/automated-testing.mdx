@@ -1,0 +1,44 @@
+---
+title: Automated testing
+description: Use automation to detect repeatable machine-testable failures early.
+---
+
+# Automated testing
+
+**Audience:** QA, Accessibility Test Engineers, Developers, UAT  
+**Purpose:** Use automation to detect repeatable machine-testable failures early.
+
+Automated testing is valuable for fast feedback and regression prevention.
+
+It can help identify issues such as:
+- some missing names and labels;
+- invalid ARIA;
+- some contrast failures;
+- structural errors.
+
+It cannot determine whether an interaction is understandable, whether focus is moved
+appropriately in every workflow, whether error recovery makes sense, or whether a
+product is accessible overall.
+
+Use automation as one layer of the testing strategy.
+
+## Automation in CI
+
+This repository runs ESLint, content/navigation checks, a production build, search
+indexing and Playwright with axe. See the
+[quality workflow](https://github.com/JHodgkins/Accessibility-PlayBook) in the source repository.
+
+```yaml
+- run: npm ci
+- run: npx playwright install --with-deps chromium
+- run: npm run check
+```
+
+The browser suite checks rendered pages, internal routes, headings, landmarks,
+selected WCAG A/AA rules and narrow reflow. Keep the report as a CI artefact, fail
+on regressions and investigate the affected user experience before changing a rule.
+Do not suppress a finding just to make the build green.
+
+Add interaction tests for meaningful state transitions such as failed form submission
+and dialog cancellation. Scan the relevant states, not only the initial page. Review
+manual coverage separately using the [testing baseline](/standards/testing-baseline).

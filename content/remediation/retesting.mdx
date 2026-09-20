@@ -1,0 +1,30 @@
+---
+title: Retesting
+description: How to verify an accessibility fix and avoid regressions.
+---
+
+
+# Retesting
+
+A retest should:
+
+1. reproduce the original failure using the original method;
+2. verify the defect no longer occurs;
+3. verify the intended accessible behaviour;
+4. check nearby or dependent interactions for regression;
+5. update evidence;
+6. close, reopen or re-scope the defect based on the result.
+
+For systemic fixes, sample more than one implementation to confirm the underlying
+pattern was corrected.
+
+**Audience:** QA, developers and accessibility specialists  
+**Purpose:** Decide whether a fix can be closed from repeatable evidence.
+
+Record the original and fixed builds, test environment, criterion and actual outcome.
+For a field-label fix, check its name, hints, error state and successful submission.
+For a shared modal, check multiple callers including one that removes its trigger.
+A changed test environment should be documented rather than silently replacing the
+original failing combination. QA reviews closure; Product retains any residual risk.
+
+See the [worked defect](/remediation/fix-examples) and [test records](/resources/templates).

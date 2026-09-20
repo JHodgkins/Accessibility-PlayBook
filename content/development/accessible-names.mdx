@@ -1,0 +1,28 @@
+---
+title: Accessible names
+description: Ensure controls and landmarks can be identified programmatically.
+---
+
+# Accessible names
+
+**Audience:** Developers, Technical leads, QA  
+**Purpose:** Ensure controls and landmarks can be identified programmatically.
+
+## Principles
+
+- Use visible labels as the accessible name where practical.
+- Keep visible text and programmatic naming consistent.
+- Avoid duplicate or ambiguous names in the same context.
+
+## Review question
+
+Can the implementation expose the correct purpose, state and interaction using native
+platform semantics before additional scripting or ARIA is introduced?
+
+## Inspect the computed name
+
+Check the browser accessibility tree as well as the markup. An aria-label can replace visible text in the computed name, so a control labelled “Save address” should not become “Submit” programmatically. Prefer the native label relationship for fields and button text for actions. Test repeated controls in their surrounding context.
+
+## Related guidance
+
+[Form fields](/components/form-fields), [buttons](/components/buttons), [screen-reader testing](/testing/screen-readers).

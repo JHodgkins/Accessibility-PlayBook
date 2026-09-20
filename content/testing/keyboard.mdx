@@ -1,0 +1,31 @@
+---
+title: Keyboard testing
+description: Verify that all essential functionality can be reached and operated without a pointer.
+---
+
+# Keyboard testing
+
+**Audience:** QA, Accessibility Test Engineers, Developers, UAT  
+**Purpose:** Verify that all essential functionality can be reached and operated without a pointer.
+
+## Baseline procedure
+
+1. Put the pointer aside.
+2. Start at the browser chrome or top of the page and navigate using `Tab` and `Shift+Tab`.
+3. Verify logical focus order and visible focus.
+4. Operate controls with their expected keys.
+5. Check there are no keyboard traps.
+6. Exercise complete high-value journeys, not only individual controls.
+
+For composite widgets, use the keyboard pattern defined by that component rather than
+assuming every internal item must be in the normal `Tab` order.
+
+## Keyboard test record
+
+Copy the [shared test record](/resources/templates#method-test-record) for each
+scenario and add: Starting location and intended task; keys pressed; focus order and visibility; activation result; reverse navigation; trap or obstruction; expected versus actual result.
+
+Record pass, fail, blocked or not tested for each expected outcome. Include a build
+identifier and durable evidence link. Route failures through the
+[severity model](/remediation/severity-model), then repeat the failed steps and the
+surrounding journey after a fix.

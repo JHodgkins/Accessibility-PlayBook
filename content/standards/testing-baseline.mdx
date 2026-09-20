@@ -1,0 +1,60 @@
+---
+title: Testing baseline
+description: Minimum repeatable accessibility evaluation approach.
+---
+
+# Testing baseline
+
+**Audience:** QA leads, accessibility specialists, product owners and engineers  
+**Purpose:** Define repeatable evaluation evidence for a release.  
+**When to use:** Refinement, test planning and release review.  
+**Owner:** QA / Accessibility
+
+The baseline combines complementary methods:
+
+1. semantic and code review;
+2. automated accessibility checks;
+3. keyboard-only testing;
+4. screen-reader testing appropriate to the supported platform;
+5. zoom, reflow and magnification review;
+6. mobile accessibility testing where applicable;
+7. end-to-end journey testing;
+8. disabled-user research or usability work when the product risk warrants it.
+
+No single tool or assistive technology establishes accessibility on its own.
+
+## Ownership and coverage
+
+Select critical journeys, reusable components and representative content before
+choosing tools. Cover normal, loading, empty, error and success states. Record
+untested combinations as coverage gaps. Test the built product, including third-party
+steps, rather than approving a component demo as evidence for an entire journey.
+
+## Illustrative AT and browser matrix
+
+This is a planning example, not a claim that this POC has passed these combinations.
+Replace it with product analytics, user research, contractual commitments and actual
+version numbers. QA owns the matrix and reviews it each release and after major updates.
+
+| Environment | Method | Representative coverage |
+| --- | --- | --- |
+| Windows + Chrome + NVDA | Keyboard and screen reader | Core desktop journeys, forms and dialogs |
+| Windows + Edge + JAWS | Screen reader where audience requires it | Enterprise workflows and data tables |
+| macOS + Safari + VoiceOver | Screen reader and keyboard | Structure, state changes and focus recovery |
+| iOS + Safari + VoiceOver | Touch exploration and swipe navigation | Mobile navigation and form recovery |
+| Android + Chrome + TalkBack | Touch exploration and swipe navigation | Mobile journeys and dynamic updates |
+| Desktop supported browsers | Keyboard, 200%/400% zoom, text spacing | Every changed template and interaction |
+| Windows forced colours; OS magnifier | Low-vision review | Controls, focus, icons and task context |
+| Supported voice-control platform | Visible-label activation | Critical controls and ambiguous names |
+
+For each run, record OS, browser, AT and rules-engine versions, settings, build,
+viewport, tester and date. An emulator is useful for layout checks but does not
+replace a physical-device AT test. A DOM accessibility snapshot does not replace
+listening to and operating a screen reader.
+
+## Evidence and exit decision
+
+Use the [method records](/resources/templates) and link each result to a criterion.
+A pass describes the observed outcome. A failure links to a defect and user impact.
+Blocked and not tested remain distinct from pass. QA summarises coverage; Product
+makes the [release decision](/delivery/release-gates) with authorised risk input.

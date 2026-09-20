@@ -1,0 +1,96 @@
+---
+title: Buttons
+description: Specify controls that perform actions.
+---
+
+# Buttons
+
+**Audience:** Designers, Developers, QA  
+**Purpose:** Specify controls that perform actions.  
+**When to use:** Component design, implementation, review and testing.  
+**Owner:** Accessibility / Design System
+
+## Overview
+
+Use buttons for actions such as saving or expanding content, and links for navigation. A toggle button represents an on/off setting; it is not a replacement for every checkbox.
+
+## User needs
+
+Users need to recognise the action, locate focus and understand whether activation changed anything. Names should remain clear when controls are encountered out of context.
+
+## Accessibility requirements
+
+Use a native `button` with an explicit type. Its accessible name must include the visible label. Expose `aria-pressed` only for toggles and `aria-expanded` only for disclosure controls. Avoid accidental form submission by using `type="button"` for non-submit actions.
+
+## Visual behaviour
+
+Provide distinguishable default, focus, hover, disabled and pressed states. Focus and state must not rely on colour alone. Aim for comfortably sized targets and spacing; assess WCAG 2.2 target-size exceptions in context.
+
+## Keyboard behaviour
+
+Tab reaches the button; Enter and Space activate it. Native buttons implement these keys. Do not attach duplicate keyboard handlers that cause two activations.
+
+## Screen-reader behaviour
+
+Verify the name, button role and applicable pressed/expanded state. For a toggle, keep the label stable as its state changes. Announce asynchronous completion through an appropriate status message when focus stays on the control.
+
+## Magnification and zoom
+
+Allow labels to wrap. Test long translated labels and 400% zoom without clipped actions or overlapping buttons.
+
+## Voice-control considerations
+
+Use specific visible labels such as “Save address”. Avoid several identical “Submit” buttons in the same context.
+
+## Developer implementation
+
+Use `disabled` when removing activation is appropriate; it also removes a native button from sequential focus. If a disabled action must remain discoverable, explain its unavailable state nearby. `aria-disabled` alone does not prevent activation.
+
+## Code examples
+
+```html
+<button type="submit">Save address</button>
+<button type="button" aria-pressed="false" id="pin">Pin project</button>
+<script>
+  const pin = document.querySelector('#pin');
+  pin.addEventListener('click', () => {
+    const pressed = pin.getAttribute('aria-pressed') === 'true';
+    pin.setAttribute('aria-pressed', String(!pressed));
+  });
+</script>
+```
+
+The save button belongs inside its form. The independent pin toggle keeps its name and updates its programmatic state; style `[aria-pressed="true"]` with a visible non-colour cue in the consuming product.
+
+## Testing procedure
+
+1. Reach each button with Tab and confirm visible focus.
+2. Activate once with Enter and once with Space; verify one outcome per activation.
+3. Check names and state changes with the supported screen reader.
+4. Exercise unavailable, loading, error and success conditions.
+5. Check enlarged labels and forced colours.
+
+## Common failures
+
+Clickable spans omit native behaviour; icon-only controls lose names; default submit types submit the wrong form; changing a toggle label can obscure its stable purpose.
+
+## Remediation
+
+Replace simulated buttons with native elements, preserve event semantics and remove redundant key handlers. Retest forms that consume the shared button.
+
+## Acceptance criteria
+
+- Each action is named, keyboard operable and visibly focused.
+- Toggle state matches the visible state after every activation.
+- A single activation causes one intended action.
+- Unavailability is explained and enforced.
+
+## Standards mapping
+
+Review [2.1.1](https://www.w3.org/TR/WCAG22/#keyboard), [2.4.7](https://www.w3.org/TR/WCAG22/#focus-visible), [2.5.3](https://www.w3.org/TR/WCAG22/#label-in-name), [2.5.8](https://www.w3.org/TR/WCAG22/#target-size-minimum) and [4.1.2](https://www.w3.org/TR/WCAG22/#name-role-value) in context. These are relevant checks, not an exhaustive
+conformance claim. See [EN version and scope](/standards/en-301-549) for the separate
+European standard baseline.
+
+## Related guidance
+
+[Accessible names](/development/accessible-names), [keyboard testing](/testing/keyboard), [modal dialogs](/components/modal-dialogs).

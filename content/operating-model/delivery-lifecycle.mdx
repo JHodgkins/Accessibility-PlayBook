@@ -1,0 +1,102 @@
+---
+title: Delivery lifecycle
+description: Where accessibility activity occurs from discovery to post-release.
+---
+
+# Accessibility delivery lifecycle
+
+**Audience:** Product owners, delivery managers, designers, developers, QA  
+**Purpose:** Define when accessibility work happens and prevent end-of-cycle surprises.  
+**When to use:** Planning checkpoints and reviewing readiness for the next stage.  
+**Owner:** Delivery / Product
+
+## 1. Discovery
+
+Identify disabled-user needs, applicable standards, high-risk journeys and likely
+assistive-technology interactions.
+
+**Evidence:** user needs, accessibility risks, research questions.
+
+## 2. Requirements and refinement
+
+Create testable accessibility acceptance criteria and identify dependencies on
+design-system components or specialist review.
+
+**Evidence:** backlog criteria, Definition of Done, identified risks.
+
+## 3. Design
+
+Review interaction states, focus behaviour, error handling, responsive behaviour,
+content structure and reusable patterns.
+
+**Evidence:** annotated designs or approved component pattern.
+
+## 4. Development
+
+Use native semantics where possible, implement keyboard support, accessible names,
+states and focus management, then perform developer checks.
+
+**Evidence:** code review, automated scan where appropriate, developer test notes.
+
+## 5. QA and accessibility evaluation
+
+Combine automated checks with manual keyboard, screen-reader, zoom/magnification and
+other relevant testing.
+
+**Evidence:** test results, defects, traceability to acceptance criteria.
+
+## 6. UAT
+
+Exercise realistic end-to-end journeys. UAT does not replace specialist testing; it
+adds confidence that important workflows remain understandable and operable.
+
+## 7. Release decision
+
+Review unresolved accessibility risk alongside other product risks.
+
+Critical barriers to core journeys should normally block release unless the
+organisation's authorised exception process explicitly decides otherwise.
+
+## 8. Post-release
+
+Monitor customer feedback, regressions and recurring defect patterns. Feed lessons
+back into patterns, training and automated controls.
+
+## The feedback loop
+
+A repeated defect should not only be fixed in one product. Ask whether the
+**component, pattern, developer guidance, test guidance or training** also needs to
+change.
+
+## Lifecycle at a glance
+
+<ol className="lifecycle">
+  <li><strong>Discover:</strong> understand users and barriers.</li>
+  <li><strong>Define:</strong> agree outcomes and acceptance criteria.</li>
+  <li><strong>Design:</strong> describe every interaction state.</li>
+  <li><strong>Build:</strong> implement and self-check.</li>
+  <li><strong>Evaluate:</strong> test and remediate.</li>
+  <li><strong>Validate:</strong> exercise realistic user journeys.</li>
+  <li><strong>Release:</strong> record the evidence and decision.</li>
+  <li><strong>Learn:</strong> feed findings into the next discovery cycle.</li>
+</ol>
+
+The ordered list is the diagram's text equivalent: progress follows the list, and
+post-release learning returns to discovery. Teams may iterate within any stage.
+
+## Worked evidence trail: account registration
+
+| Stage | Example artefact | Review before proceeding |
+| --- | --- | --- |
+| Discovery | Research note: users magnify fields and lose error context | Product identifies recovery as a high-risk task |
+| Requirements | Story REG-12 with field naming and error recovery criteria | QA confirms each outcome can be tested |
+| Design | Annotated normal, invalid and success states | Design and engineering agree focus destinations |
+| Development | Review notes and component checks | Technical lead verifies native controls and relationships |
+| QA | Environment log, keyboard record and defect A11Y-017 | QA links failures to the story criteria |
+| UAT | Participant task outcomes and consented observations | Product reviews unresolved journey barriers |
+| Release | Report with fixed defects, gaps and signed decisions | Named approver records release or hold |
+| Post-release | Support trend: repeated address errors | Product funds a component improvement and training |
+
+Store durable links, dates, build identifiers and reviewer names. Do not attach
+personal participant data or credentials to broadly accessible tickets.
+See the [worked defect](/remediation/fix-examples) and [release report](/delivery/reporting).

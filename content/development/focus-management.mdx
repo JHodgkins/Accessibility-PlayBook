@@ -1,0 +1,28 @@
+---
+title: Focus management
+description: Move or preserve focus only when it supports a predictable interaction.
+---
+
+# Focus management
+
+**Audience:** Developers, Technical leads, QA  
+**Purpose:** Move or preserve focus only when it supports a predictable interaction.
+
+## Principles
+
+- Do not move focus merely to announce content.
+- When opening a modal, place focus intentionally.
+- When closing a transient UI, normally restore focus to a logical location.
+
+## Review question
+
+Can the implementation expose the correct purpose, state and interaction using native
+platform semantics before additional scripting or ARIA is introduced?
+
+## Choose destinations before writing handlers
+
+Document opening, cancellation, success and failure destinations for a transient interface. If an action removes its trigger, choose a surviving row, heading or next logical control. Use tabindex="-1" for a deliberate programmatic destination without adding it to the regular Tab sequence. Status messages usually do not need focus movement.
+
+## Related guidance
+
+[Modal dialogs](/components/modal-dialogs), [error handling](/design/error-handling), [keyboard testing](/testing/keyboard).

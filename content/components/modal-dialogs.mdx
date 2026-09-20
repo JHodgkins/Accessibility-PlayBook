@@ -1,0 +1,197 @@
+---
+title: Modal dialogs
+description: A complete focus and interaction specification for modal dialogs.
+---
+
+# Modal dialogs
+
+**Audience:** Designers, Developers, QA  
+**Purpose:** Define predictable modal behaviour and recovery.  
+**When to use:** Designing, implementing or reviewing a task that interrupts the current page.  
+**Owner:** Accessibility / Design System
+
+## Overview
+
+A modal temporarily limits interaction to one task. Use a normal page for long,
+complex workflows. This specification uses native HTML dialog semantics and a small
+confirmation example; product teams must still test their actual content and actions.
+
+## User needs
+
+People must be able to identify the new context, find the task, operate its controls,
+cancel safely and return to where they were. A person viewing only a small part of
+the screen needs the title, explanation and current control to remain discoverable.
+
+## Accessibility requirements
+
+The dialog must expose a name, move focus inside when opened and prevent interaction
+with the background. It must provide a visible dismissal control. Closing must return
+focus to the opener, or a documented logical successor if that opener was removed.
+Do not use `aria-modal` alone to make a custom overlay modal: it does not implement behaviour.
+
+## Visual behaviour
+
+Use a clear heading, concise explanation and unambiguous action labels. Provide
+visible focus and distinguish the dialog boundary without relying solely on shadow.
+The background must look inactive. Avoid nested modals; put errors in the current dialog.
+
+## Keyboard behaviour
+
+Opening from a button supports Enter and Space. For a destructive confirmation,
+initial focus should be on Cancel. Tab and Shift+Tab must not reach page controls
+behind the modal. Escape dismisses this example. Do not override browser shortcuts.
+For long structured content, a heading with `tabindex="-1"` can be a better initial
+focus target; do not put `tabindex` on the dialog itself.
+
+## Screen-reader behaviour
+
+The dialog's role and title must be available. A short explanation may be linked with
+`aria-describedby`; omit that association for long structured content so readers can
+navigate its headings and lists. Background content must be unavailable while modal.
+Verify meaning and navigation, not a prescribed spoken phrase.
+
+## Magnification and zoom
+
+Constrain the dialog to the viewport and allow vertical scrolling. At 200% and 400%
+zoom, reach every action without horizontal page scrolling. Check that focusing a
+control scrolls it into view and that the title is not permanently obscured.
+
+## Voice-control considerations
+
+Use visible labels such as “Cancel” and “Confirm archive” as the accessible names.
+Avoid several identical “OK” controls. A user must be able to dismiss by naming the
+visible button without knowing the Escape shortcut.
+
+## Developer implementation
+
+Use `showModal()`, not `show()` or a manually added `open` attribute, for native
+modal behaviour. Feature-detect the method if older embedded browsers are in scope,
+and provide an ordinary confirmation page when unsupported. Current major browser
+engines implement dialog, but compatibility is not evidence that every AT combination
+works for your product. Record actual versions in the [testing baseline](/standards/testing-baseline).
+
+The [HTML dialog specification](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element)
+defines browser behaviour. [MDN's dialog reference and compatibility table](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog)
+provides implementation context. Support guidance reviewed 20 September 2026.
+
+## Code examples
+
+This self-contained example confirms an intention only; it does not mutate any project.
+In a product, perform the server operation separately, preserve errors, and choose a
+focus destination that still exists after the operation.
+
+```html
+<a id="archive-link" href="/projects/archive-confirmation">Archive project</a>
+<dialog id="archive-dialog" aria-labelledby="archive-title"
+        aria-describedby="archive-description">
+  <h2 id="archive-title">Archive project?</h2>
+  <p id="archive-description">You can restore it from archived projects.</p>
+  <form method="dialog">
+    <button value="cancel" autofocus>Cancel</button>
+    <button value="confirm">Confirm archive</button>
+  </form>
+</dialog>
+<p id="archive-status" role="status"></p>
+
+<style>
+  dialog {
+    box-sizing: border-box;
+    max-inline-size: min(32rem, calc(100% - 2rem));
+    max-block-size: calc(100dvh - 2rem);
+    overflow: auto;
+    border: 2px solid;
+    padding: 1.5rem;
+  }
+  dialog::backdrop { background: rgb(0 0 0 / 60%); }
+  button:focus-visible { outline: 3px solid; outline-offset: 3px; }
+</style>
+
+<script>
+  const dialog = document.querySelector('#archive-dialog');
+  const fallback = document.querySelector('#archive-link');
+  const status = document.querySelector('#archive-status');
+
+  if (typeof dialog.showModal === 'function') {
+    const opener = document.createElement('button');
+    opener.type = 'button';
+    opener.textContent = fallback.textContent;
+    fallback.replaceWith(opener);
+
+    opener.addEventListener('click', () => {
+      dialog.returnValue = '';
+      status.textContent = '';
+      dialog.showModal();
+    });
+    dialog.addEventListener('cancel', () => {
+      dialog.returnValue = 'cancel';
+    });
+    dialog.addEventListener('close', () => {
+      opener.focus();
+      status.textContent = dialog.returnValue === 'confirm'
+        ? 'Archive confirmed in this demonstration. No data was changed.'
+        : 'Archive cancelled.';
+    });
+  }
+</script>
+```
+
+The progressive-enhancement link needs a real confirmation route in the consuming
+product. `method="dialog"` closes the modal without submitting to a server; the
+button value records the choice. Resetting the value on each opening prevents a
+previous confirmation from being reused after Escape. Native modality provides
+background inertness without a hand-written focus trap.
+
+## Testing procedure
+
+1. Open using Enter and Space; confirm Cancel receives visible focus.
+2. Tab and Shift+Tab through actions; check background controls cannot be operated.
+3. Cancel, reopen, confirm, reopen and Escape. Check each reported outcome.
+4. Verify focus returns after each closure, including repeated openings.
+5. With the supported screen reader, find the dialog name, description and actions;
+   check background content is unavailable in reading as well as focus navigation.
+6. Test long content, errors, narrow viewports, zoom and forced colours.
+7. Disable JavaScript and verify the product's fallback confirmation page.
+
+## Common failures
+
+| Failure | Consequence |
+| --- | --- |
+| Using `open` instead of `showModal()` | Background remains interactive |
+| Focusing a destructive action by default | Accidental confirmation becomes easier |
+| Removing the opener without a successor | Focus can return to the document start |
+| Reusing a stale return value | Escape may be treated as confirmation |
+| Fixed height with hidden overflow | Actions become unreachable when enlarged |
+
+## Remediation
+
+Reproduce the complete open–act–close sequence. Correct the shared dialog utility,
+then retest all consumers, especially destructive operations and removed triggers.
+Attach focus destinations and supported environment results to the defect.
+
+## Acceptance criteria
+
+- Opening exposes the title and moves focus to the documented initial target.
+- All actions work by keyboard and background controls remain unavailable.
+- Cancel and Escape never perform the confirmation action.
+- Repeated openings reset transient state and restore focus predictably.
+- Enlarging content leaves every action reachable.
+
+## Standards mapping
+
+Relevant WCAG 2.2 checks include [2.1.1](https://www.w3.org/TR/WCAG22/#keyboard),
+[2.1.2](https://www.w3.org/TR/WCAG22/#no-keyboard-trap),
+[2.4.3](https://www.w3.org/TR/WCAG22/#focus-order),
+[2.4.7](https://www.w3.org/TR/WCAG22/#focus-visible),
+[1.4.10](https://www.w3.org/TR/WCAG22/#reflow) and
+[4.1.2](https://www.w3.org/TR/WCAG22/#name-role-value).
+Their web counterparts in [EN 301 549 V3.2.1 (PDF)](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/03.02.01_60/en_301549v030201p.pdf)
+are 9.2.1.1, 9.2.1.2, 9.2.4.3, 9.2.4.7, 9.1.4.10 and 9.4.1.2 respectively.
+Check WCAG 2.2's additional [2.4.11](https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum)
+separately. These references do not prescribe a universal initial focus target.
+
+## Related guidance
+
+- [WAI modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+- [Focus management](/development/focus-management)
+- [Buttons](/components/buttons) and [form fields](/components/form-fields)
+- [Keyboard testing](/testing/keyboard) and [magnification testing](/testing/magnification-and-zoom)

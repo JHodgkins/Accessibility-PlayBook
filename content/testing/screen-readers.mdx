@@ -1,0 +1,30 @@
+---
+title: Screen-reader testing
+description: Evaluate programmatic structure, names, roles, states, relationships and dynamic feedback.
+---
+
+# Screen-reader testing
+
+**Audience:** QA, Accessibility Test Engineers, Developers, UAT  
+**Purpose:** Evaluate programmatic structure, names, roles, states, relationships and dynamic feedback.
+
+## What to verify
+
+- page title, headings and landmarks support navigation;
+- controls expose meaningful names and roles;
+- states such as expanded, selected, required and invalid are available;
+- instructions and errors are connected to the relevant controls;
+- dynamic updates are communicated when users need them.
+
+Do not treat one exact spoken phrase as the universal expected result. Browser,
+screen reader, verbosity and mode can affect output.
+
+## Screen-reader test record
+
+Copy the [shared test record](/resources/templates#method-test-record) for each
+scenario and add: AT/browser/OS versions; verbosity and navigation mode; heading/landmark path; name, role and state observed; dynamic updates; recovery outcome. Spoken examples are evidence, not universal expected wording.
+
+Record pass, fail, blocked or not tested for each expected outcome. Include a build
+identifier and durable evidence link. Route failures through the
+[severity model](/remediation/severity-model), then repeat the failed steps and the
+surrounding journey after a fix.

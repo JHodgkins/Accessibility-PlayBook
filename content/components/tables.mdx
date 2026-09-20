@@ -1,0 +1,97 @@
+---
+title: Tables
+description: Specify readable data relationships and usable table interactions.
+---
+
+# Tables
+
+**Audience:** Designers, Developers, QA  
+**Purpose:** Specify readable data relationships and usable table interactions.  
+**When to use:** Component design, implementation, review and testing.  
+**Owner:** Accessibility / Design System
+
+## Overview
+
+Use a data table when comparing values across rows and columns. Use CSS for page layout. A table is not an interactive ARIA grid unless it actually needs the grid interaction model.
+
+## User needs
+
+Readers need to know what the table describes and which headings apply to each value, including when only one cell is visible through magnification.
+
+## Accessibility requirements
+
+Use native table, caption, row and header elements. Mark column and row headers accurately. Simplify complex merged headers where possible; use explicit header associations when simple scope relationships are insufficient.
+
+## Visual behaviour
+
+Keep text readable and numeric alignment consistent. Use borders or spacing to support row tracking. Do not encode status only through cell colour.
+
+## Keyboard behaviour
+
+Static cells do not need Tab stops. Links and buttons inside cells remain in normal order. If a wide table needs horizontal scrolling, provide a labelled, focusable scroll region and a visible focus indicator.
+
+## Screen-reader behaviour
+
+Table navigation must expose the caption, dimensions and relevant headers. Test actual header associations, not just the presence of `th` elements. A sort control must communicate the current sort through `aria-sort` on its header.
+
+## Magnification and zoom
+
+Prefer smaller tables and short headings. Where a two-dimensional layout is essential, constrain scrolling to the table region; surrounding prose must still reflow. Verify the final column remains reachable.
+
+## Voice-control considerations
+
+Name row actions with context, such as “View registration report”, while preserving the visible words in the accessible name.
+
+## Developer implementation
+
+This simple table has column and row headers. Do not add ARIA table roles to native elements. For sorting, use a real button in the header, update data and `aria-sort`, and retain focus on that button.
+
+## Code examples
+
+```html
+<table>
+  <caption>Accessibility defects by journey</caption>
+  <thead>
+    <tr><th scope="col">Journey</th><th scope="col">Open high-severity defects</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Registration</th><td>2</td></tr>
+    <tr><th scope="row">Profile update</th><td>0</td></tr>
+  </tbody>
+</table>
+```
+
+The caption supplies context and scope associates each value with its row and column. Counts are illustrative, not this site’s audit results.
+
+## Testing procedure
+
+1. Navigate by table and cell commands with the supported screen reader.
+2. Confirm the correct row and column context at every value.
+3. Tab through any controls without stopping on static cells.
+4. Check every column at 400% zoom and narrow width.
+5. If sorting exists, verify data order, focus retention and exposed sort direction.
+
+## Common failures
+
+Bold text imitates headers; mobile CSS destroys relationships; large tables overflow the whole page; sorting changes order without exposing state.
+
+## Remediation
+
+Correct native markup and simplify multi-level headers before introducing ARIA. Test the responsive version independently; visual resemblance to a table is insufficient.
+
+## Acceptance criteria
+
+- Values retain their correct header relationships.
+- Table purpose is clear before reading its data.
+- All columns and embedded controls remain reachable.
+- Sorting, if provided, preserves focus and communicates direction.
+
+## Standards mapping
+
+Review [1.3.1](https://www.w3.org/TR/WCAG22/#info-and-relationships), [1.3.2](https://www.w3.org/TR/WCAG22/#meaningful-sequence), [1.4.10](https://www.w3.org/TR/WCAG22/#reflow) and, for interactive controls, [2.1.1](https://www.w3.org/TR/WCAG22/#keyboard) in context. These are relevant checks, not an exhaustive
+conformance claim. See [EN version and scope](/standards/en-301-549) for the separate
+European standard baseline.
+
+## Related guidance
+
+[Semantic HTML](/development/semantic-html), [responsive design](/design/responsive-design), [screen-reader testing](/testing/screen-readers), [magnification testing](/testing/magnification-and-zoom).

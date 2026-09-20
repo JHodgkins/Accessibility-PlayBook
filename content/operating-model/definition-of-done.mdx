@@ -1,0 +1,41 @@
+---
+title: Definition of Done
+description: Accessibility conditions for completing product work.
+---
+
+
+# Accessibility Definition of Done
+
+A feature should not be considered complete simply because an accessibility scan has
+no automated findings.
+
+A practical Definition of Done can require that:
+
+- applicable accessibility acceptance criteria are met;
+- keyboard operation has been verified;
+- relevant screen-reader behaviour has been evaluated;
+- zoom/reflow has been checked where applicable;
+- automated testing has been run where useful;
+- accessibility defects have been triaged;
+- unresolved material risks have an authorised decision and owner;
+- evidence is attached to the work item or release record.
+
+## Apply depth according to risk
+
+**Audience:** Product, delivery, engineering and QA  
+**Purpose:** Choose evidence proportionate to the changed journey.
+
+All changes must meet applicable acceptance criteria. Risk changes the depth and
+coverage of evaluation, not the accessibility standard.
+
+| Change | Additional evidence before Done |
+| --- | --- |
+| Editorial change using established components | Heading/link review, content clarity and narrow-layout check |
+| New interaction or component variant | Every state tested by keyboard, supported screen reader and zoom; regression evidence |
+| Authentication, payment, essential service or irreversible action | End-to-end specialist review, error recovery, relevant mobile coverage and disabled-user validation plan |
+| Shared component change | Representative consumers checked; affected teams notified and migration ownership assigned |
+
+The product owner records risk during refinement. QA challenges missing coverage.
+An untested condition is a gap, not a pass. A release exception does not silently
+turn an unmet feature criterion into “Done”; keep the defect and remediation work open.
+See [testing baseline](/standards/testing-baseline) and [risk acceptance](/delivery/risk-acceptance).

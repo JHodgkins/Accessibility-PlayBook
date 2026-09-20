@@ -1,0 +1,62 @@
+diff --git a/node_modules/nextra-theme-docs/dist/components/navbar/index.client.js b/node_modules/nextra-theme-docs/dist/components/navbar/index.client.js
+index 8598843..66754c0 100644
+--- a/node_modules/nextra-theme-docs/dist/components/navbar/index.client.js
++++ b/node_modules/nextra-theme-docs/dist/components/navbar/index.client.js
+@@ -183,7 +183,7 @@ const ClientNavbar = (t0) => {
+   }
+   let t6;
+   if ($[14] !== t5) {
+-    t6 = /* @__PURE__ */ jsx(Button, { "aria-label": "Menu", className: _temp4, onClick: _temp6, children: /* @__PURE__ */ jsx(MenuIcon, { height: "24", className: t5 }) });
++    t6 = /* @__PURE__ */ jsx(Button, { "aria-label": "Menu", "aria-expanded": menu, "aria-controls": "playbook-mobile-navigation", className: _temp4, onClick: _temp6, children: /* @__PURE__ */ jsx(MenuIcon, { height: "24", className: t5 }) });
+     $[14] = t5;
+     $[15] = t6;
+   } else {
+diff --git a/node_modules/nextra-theme-docs/dist/components/sidebar.js b/node_modules/nextra-theme-docs/dist/components/sidebar.js
+index b6e7d77..5faca04 100644
+--- a/node_modules/nextra-theme-docs/dist/components/sidebar.js
++++ b/node_modules/nextra-theme-docs/dist/components/sidebar.js
+@@ -129,7 +129,8 @@ const Folder = (t0) => {
+       href: item.route,
+       prefetch: false
+     } : {
+-      "data-href": item.route
++      "data-href": item.route,
++      "aria-expanded": open
+     }, className: t6, onClick: handleClick2, onFocus, children: [
+       t7,
+       t10
+@@ -331,6 +332,12 @@ const Menu = forwardRef((t0, forwardedRef) => {
+ });
+ Menu.displayName = "Menu";
+ const MobileNav = () => {
++  useEffect(() => {
++    const media = window.matchMedia("(min-width: 768px)");
++    const resetMenu = () => setMenu(false);
++    media.addEventListener("change", resetMenu);
++    return () => media.removeEventListener("change", resetMenu);
++  }, []);
+   const $ = _c(22);
+   const {
+     directories
+@@ -425,7 +432,7 @@ const MobileNav = () => {
+   }
+   let t9;
+   if ($[17] !== t5 || $[18] !== t6 || $[19] !== t7 || $[20] !== t8) {
+-    t9 = /* @__PURE__ */ jsxs("aside", { className: t5, children: [
++    t9 = /* @__PURE__ */ jsxs("aside", { id: "playbook-mobile-navigation", "aria-label": "Documentation navigation", inert: !menu, onKeyDown: (event) => { if (event.key === "Escape") { event.preventDefault(); setMenu(false); document.querySelector(".nextra-hamburger")?.focus(); } }, className: t5, children: [
+       t6,
+       t7,
+       t8
+diff --git a/node_modules/nextra-theme-docs/dist/stores/menu.js b/node_modules/nextra-theme-docs/dist/stores/menu.js
+index 6ea3db5..d8164e6 100644
+--- a/node_modules/nextra-theme-docs/dist/stores/menu.js
++++ b/node_modules/nextra-theme-docs/dist/stores/menu.js
+@@ -8,6 +8,8 @@ const setMenu = (fn) => {
+   useMenuStore.setState((state) => {
+     const hasMenu = typeof fn === "function" ? fn(state.hasMenu) : fn;
+     document.documentElement.classList.toggle("x:max-md:overflow-hidden", hasMenu);
++    const blocksPage = hasMenu && window.matchMedia("(max-width: 767px)").matches;
++    document.querySelectorAll("article, footer").forEach(element => { element.inert = blocksPage; });
+     return {
+       hasMenu
+     };

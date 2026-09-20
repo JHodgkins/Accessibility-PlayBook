@@ -1,0 +1,45 @@
+---
+title: Risk acceptance
+description: Make unresolved accessibility risk explicit and time-bound.
+---
+
+# Accessibility risk acceptance
+
+**Audience:** Product, delivery, accessibility, legal/risk and authorised approvers  
+**Purpose:** Record a temporary business decision without concealing the barrier.  
+**When to use:** A known defect cannot be fixed before a proposed release.  
+**Owner:** Authorised risk owner
+
+A risk record should capture:
+
+| Field | Purpose |
+| --- | --- |
+| Barrier | What fails |
+| Affected users | Who experiences the problem |
+| Journey | Which task is affected |
+| Impact | What the user cannot do or must do differently |
+| Workaround | Whether a realistic workaround exists |
+| Reason for exception | Why it cannot be fixed before release |
+| Owner | Who is accountable for remediation |
+| Target date | When remediation is expected |
+| Approver | Who accepts the release risk |
+| Review date | When the decision is reconsidered |
+
+Risk acceptance does not change whether a barrier exists. It records an accountable
+business decision about unresolved risk.
+
+## Decision rules
+
+The proposer must include alternatives considered and evidence for any workaround.
+Accessibility and QA advise on user impact; the named risk owner accepts only within
+their delegated authority. Legal obligations require appropriate legal review and
+cannot be waived by changing a ticket status.
+
+Keep the defect open, assign funded remediation work and record both review and expiry
+dates. Reassess immediately when scope, severity or workaround reliability changes.
+Do not renew an exception automatically. A repeated exception must trigger a systemic
+review of the component, supplier or delivery process.
+
+Use the [worked expiry example](/operating-model/escalation-and-exceptions).
+At closure, link retest evidence and the closing decision. At expiry without a fix,
+apply the [release gate](/delivery/release-gates) and escalate to the accountable owner.

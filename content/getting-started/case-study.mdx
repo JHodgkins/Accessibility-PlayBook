@@ -1,0 +1,79 @@
+---
+title: Building the playbook
+description: Design decisions behind an accessibility operating model as a documentation product.
+---
+
+# Building the playbook
+
+**Audience:** Accessibility leads, product directors, engineers and portfolio reviewers  
+**Purpose:** Explain the design decisions and the evidence needed to assess this POC.  
+**When to use:** Reviewing the approach or adapting it to an organisation.  
+**Owner:** Playbook maintainer
+
+## The problem
+
+Accessibility guidance often stops at technical criteria. Teams also need to know
+who owns a decision, when evidence is produced, how a barrier affects release and
+how fixes improve the shared system. This playbook connects those decisions without
+requiring every role to become a standards specialist.
+
+## Architecture and reading path
+
+The ten canonical sections remain visible in navigation. Each has a distinct job:
+orientation, ownership, standards, design, engineering, components, evaluation,
+remediation, release decisions and reusable resources.
+
+<ol className="lifecycle">
+  <li><strong>Standards:</strong> establish the baseline.</li>
+  <li><strong>Operating model:</strong> assign decisions and checkpoints.</li>
+  <li><strong>Design and development:</strong> prevent barriers.</li>
+  <li><strong>Components:</strong> specify reusable behaviour.</li>
+  <li><strong>Testing:</strong> collect evidence.</li>
+  <li><strong>Remediation:</strong> correct and retest failures.</li>
+  <li><strong>Delivery:</strong> decide release and track risk.</li>
+  <li><strong>Resources:</strong> make the process repeatable.</li>
+</ol>
+
+This ordered text is also the visual's accessible equivalent. Getting started provides
+entry points across the sequence. Findings from testing and support feed back into
+standards interpretation, components and role-specific training.
+
+## Deliberate boundaries
+
+A standard states what is required; this playbook describes how work gets done.
+Component specifications describe behaviour, while approved patterns are reusable
+implementations reviewed for a particular design system. The examples here demonstrate
+implementation choices; they are not automatically approved organisational patterns.
+Acceptance criteria define outcomes, testing records observations, and remediation
+tracks correction. Training builds the skills needed to use all of them.
+
+## Technology choices
+
+Next.js App Router supplies the application shell. Nextra 4 and its Docs Theme provide
+navigation and documentation conventions. MDX stays in `content/`, with `_meta.js`
+ordering, so guidance can be reviewed alongside code in ordinary pull requests.
+Search is generated from the production pages rather than requiring a separate service.
+
+## Depth and trade-offs
+
+Form fields and dialogs anchor the technical examples because they connect labels,
+errors, focus, state and recovery. The operating-model examples show how that detail
+becomes shared accountability. Supporting pages provide a practical starting point
+and cross-links without repeating every specification.
+
+The inherited theme is tested as part of the product. An optional page-copy menu was
+disabled after browser evaluation found its trigger had no accessible name. Code-block
+copy controls remain available. A Zod compatibility override keeps Nextra's layout
+rendering reproducible; dependency changes require another build and browser review.
+
+## Evidence and limits
+
+Automated checks can detect repeatable failures and protect the architecture. They do
+not establish conformance, substitute for disabled-user research or approve standards
+interpretation. Expert review, real screen-reader use and physical-device checks are
+tracked separately in the project plan. No production adoption or user-impact metrics
+are claimed for this proof of concept.
+
+Follow the [worked defect](/remediation/fix-examples),
+[release report](/delivery/reporting) and [testing baseline](/standards/testing-baseline)
+for examples of the evidence an organisation would maintain.

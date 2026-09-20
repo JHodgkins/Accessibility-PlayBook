@@ -1,0 +1,31 @@
+---
+title: UAT guidance
+description: Use accessible user journeys to complement specialist testing.
+---
+
+# UAT guidance
+
+**Audience:** QA, Accessibility Test Engineers, Developers, UAT  
+**Purpose:** Use accessible user journeys to complement specialist testing.
+
+UAT should focus on realistic outcomes such as signing in, completing a purchase,
+updating account information or submitting a form.
+
+UAT testers should have clear scenarios and an escalation route. They should not be
+expected to interpret every WCAG success criterion.
+
+A failed accessible journey is product risk even if an automated scan is clean.
+
+## Worked scenarios
+
+| Scenario | Task prompt | Observe | Escalate when |
+| --- | --- | --- | --- |
+| Recover from a form error | Register with an incomplete email, then correct it | Finding the error, understanding correction, retaining other values | The participant cannot identify or recover from the error |
+| Cancel a consequential action | Open archive confirmation, inspect it, then cancel | Context change, finding Cancel, return location | Cancellation performs the action or loses position |
+| Find delivery information on mobile | Locate the delivery policy and return to the order | Navigation clarity, expanded state, page orientation | The user cannot locate information without assistance |
+
+Use realistic test data and let participants use their usual access methods.
+Agree consent, compensation and accessible session arrangements before research.
+The facilitator should avoid teaching the interface during the task; record any help
+needed. Remove personal data from shared findings. Product owns actions arising from
+UAT, while specialist QA verifies technical fixes. See [lifecycle](/operating-model/delivery-lifecycle).

@@ -1,0 +1,124 @@
+---
+title: Tabs
+description: Specify switching between related panels within one page.
+---
+
+# Tabs
+
+**Audience:** Designers, Developers, QA  
+**Purpose:** Specify switching between related panels within one page.  
+**When to use:** Component design, implementation, review and testing.  
+**Owner:** Accessibility / Design System
+
+## Overview
+
+Tabs display one related panel at a time. Use ordinary navigation links for different pages. The example uses manual activation so moving among tabs does not immediately replace content.
+
+## User needs
+
+Users need to identify the selected topic, explore alternatives and move into the associated panel with a predictable keyboard model.
+
+## Accessibility requirements
+
+Provide a labelled tablist, tab roles, selected state and unique tab–panel relationships. One tab is in the Tab sequence. Inactive panels must be hidden. Implement the keyboard model before applying ARIA roles.
+
+## Visual behaviour
+
+Distinguish selected state from keyboard focus; both can occur on different tabs with manual activation. Do not use colour alone. Avoid truncating topic labels.
+
+## Keyboard behaviour
+
+Tab enters the tablist at its current focusable tab. Left/Right Arrow move through horizontal tabs and wrap. Home/End move to the first/last. Enter or Space selects the focused tab. Tab then leaves for the visible panel or its first control. Vertical tabs use Up/Down and expose vertical orientation.
+
+## Screen-reader behaviour
+
+The list name, tab role, selected state and panel label must be available. A text-only panel can use `tabindex="0"` to provide a destination after the tablist.
+
+## Magnification and zoom
+
+Allow the tab row to wrap or provide a tested alternative presentation. Test all labels and panel content at a narrow width; do not let tabs disappear offscreen.
+
+## Voice-control considerations
+
+Tab names must contain their visible topic labels. Selected state should remain apparent after voice activation.
+
+## Developer implementation
+
+Keep focus movement separate from selection for manual activation. Automatic activation is appropriate only when panels appear without perceptible delay. The example has two text panels and no network requests.
+
+## Code examples
+
+```html
+<div role="tablist" aria-label="Project information">
+  <button type="button" role="tab" id="summary-tab"
+    aria-selected="true" aria-controls="summary-panel">Summary</button>
+  <button type="button" role="tab" id="history-tab" tabindex="-1"
+    aria-selected="false" aria-controls="history-panel">History</button>
+</div>
+<div role="tabpanel" id="summary-panel" aria-labelledby="summary-tab" tabindex="0">
+  <p>The project is active.</p>
+</div>
+<div role="tabpanel" id="history-panel" aria-labelledby="history-tab" tabindex="0" hidden>
+  <p>The project was created yesterday.</p>
+</div>
+<script>
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  function moveFocus(index) {
+    tabs.forEach((tab, i) => { tab.tabIndex = i === index ? 0 : -1; });
+    tabs[index].focus();
+  }
+  function select(index) {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = i !== index;
+    });
+    moveFocus(index);
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(i));
+    tab.addEventListener('keydown', event => {
+      const targets = { ArrowRight: (i + 1) % tabs.length,
+        ArrowLeft: (i + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1 };
+      if (event.key in targets) {
+        event.preventDefault();
+        moveFocus(targets[event.key]);
+      }
+    });
+  });
+</script>
+```
+
+Native button activation supplies Enter and Space. Arrow keys only move focus. Scope the queries to each tab component when using multiple tablists on one page.
+
+## Testing procedure
+
+1. Enter and leave the tablist with Tab and Shift+Tab.
+2. Test arrows, wrapping, Home and End without changing selection.
+3. Activate a focused tab with Enter and Space.
+4. Confirm only its panel is visible and available to a screen reader.
+5. Check focus versus selection styling, zoom and forced colours.
+
+## Common failures
+
+Every tab is in the Tab sequence; arrow keys are missing; focus and selection become confused; a hidden panel retains active controls.
+
+## Remediation
+
+Implement one state model for selection and a separate roving focus index. Verify all tab–panel IDs, remove hidden controls from navigation and test backwards travel.
+
+## Acceptance criteria
+
+- The tablist has one sequential focus entry.
+- Arrow keys explore and activation selects in manual mode.
+- Exactly one panel is exposed and correctly labelled.
+- Focus and selection are visually distinguishable.
+
+## Standards mapping
+
+Review [2.1.1](https://www.w3.org/TR/WCAG22/#keyboard), [2.4.3](https://www.w3.org/TR/WCAG22/#focus-order) and [4.1.2](https://www.w3.org/TR/WCAG22/#name-role-value) in context. These are relevant checks, not an exhaustive
+conformance claim. See [EN version and scope](/standards/en-301-549) for the separate
+European standard baseline.
+
+## Related guidance
+
+[WAI tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/), [keyboard interaction](/development/keyboard-interaction), [WAI-ARIA guidance](/development/aria), [keyboard testing](/testing/keyboard).

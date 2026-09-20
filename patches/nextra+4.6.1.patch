@@ -1,0 +1,26 @@
+diff --git a/node_modules/nextra/dist/client/components/collapse.js b/node_modules/nextra/dist/client/components/collapse.js
+index 377f7b7..01a9c55 100644
+--- a/node_modules/nextra/dist/client/components/collapse.js
++++ b/node_modules/nextra/dist/client/components/collapse.js
+@@ -128,7 +128,7 @@ const Collapse = (t0) => {
+   }
+   let t14;
+   if ($[20] !== newChildren || $[21] !== t10 || $[22] !== t13) {
+-    t14 = /* @__PURE__ */ jsx("div", { ref: containerRef, className: t10, style: t13, children: newChildren });
++    t14 = /* @__PURE__ */ jsx("div", { ref: containerRef, inert: !isOpen, className: t10, style: t13, children: newChildren });
+     $[20] = newChildren;
+     $[21] = t10;
+     $[22] = t13;
+diff --git a/node_modules/nextra/dist/client/components/skip-nav/index.js b/node_modules/nextra/dist/client/components/skip-nav/index.js
+index 757d324..3f56322 100644
+--- a/node_modules/nextra/dist/client/components/skip-nav/index.js
++++ b/node_modules/nextra/dist/client/components/skip-nav/index.js
+@@ -10,7 +10,7 @@ const SkipNavContent = (t0) => {
+   const id = t1 === void 0 ? DEFAULT_ID : t1;
+   let t2;
+   if ($[0] !== id) {
+-    t2 = /* @__PURE__ */ jsx("div", { id });
++    t2 = /* @__PURE__ */ jsx("div", { id, tabIndex: -1 });
+     $[0] = id;
+     $[1] = t2;
+   } else {

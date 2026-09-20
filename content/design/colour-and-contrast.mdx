@@ -1,0 +1,28 @@
+---
+title: Colour and contrast
+description: Ensure information and controls remain perceivable without relying on colour alone.
+---
+
+# Colour and contrast
+
+**Audience:** Designers, Product, QA  
+**Purpose:** Ensure information and controls remain perceivable without relying on colour alone.
+
+## Core guidance
+
+- Text and essential visual information must meet the organisation's contrast baseline.
+- Do not use colour as the only way to communicate error, status or selection.
+- Test hover, focus, disabled and error states, not only the default state.
+
+## Handoff expectation
+
+Designs should communicate relevant states and expected behaviour clearly enough that
+development and QA do not need to infer the accessibility requirement after build.
+
+## Review a status message
+
+Pair “Payment failed” with its red treatment so the meaning survives monochrome display. Measure text against its actual background, including gradients and hover states. Record the colours, measured result and applicable criterion in the design handoff. Inactive controls have different standards treatment, but should still be understandable.
+
+## Related guidance
+
+[WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [focus states](/design/focus-states), [testing baseline](/standards/testing-baseline).
