@@ -7,3 +7,9 @@ test-results/
 .DS_Store
 .env*
 !.env.example
+
+# Private project planning and local review records
+/AGENTS.md
+/PLAN.md
+/REQUIREMENTS.md
+/.private/
