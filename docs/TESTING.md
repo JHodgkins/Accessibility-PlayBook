@@ -21,13 +21,18 @@ To run individual checks, use `npm run lint`, `npm run build` and
 - Content validation protects the canonical navigation and required pages.
 - Browser checks inspect rendered headings, main landmarks, internal routes and fragments.
 - axe checks selected WCAG A/AA rules across the content pages.
-- Interaction tests cover search, skip links, navigation disclosures, mobile dismissal
-  and the documented modal, accordion and tab examples.
+- Interaction tests cover search, skip links, keyboard scrolling of wide tables,
+  navigation disclosures, mobile dismissal and the documented modal, accordion
+  and tab examples.
 - Layout checks cover selected pages at narrow widths, plus dark mode and emulated
   forced colours.
 
 The CI workflow runs the same quality gate and retains test reports and failure
 traces. Generated artefacts are excluded from version control.
+
+CI also runs `npm run build:pages` and `npm run test:pages` to verify the exported
+website at its GitHub Pages path, including every content route, internal links,
+navigation, direct reloads and search. Only successful checks on `main` can deploy.
 
 ## Review limitations
 

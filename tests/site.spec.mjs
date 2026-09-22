@@ -13,6 +13,18 @@ function routesIn(dir) {
 }
 const routes = routesIn('content')
 
+test('wide ownership table supports keyboard scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/operating-model/roles-and-responsibilities')
+  const table = page.getByRole('table').filter({ hasText: 'Decision or deliverable' })
+  await table.focus()
+  await expect(table).toBeFocused()
+  const outline = await table.evaluate(el => getComputedStyle(el).outlineStyle)
+  expect(outline).not.toBe('none')
+  await page.keyboard.press('ArrowRight')
+  await expect.poll(() => table.evaluate(el => el.scrollLeft)).toBeGreaterThan(0)
+})
+
 for (const route of routes) {
   test(`page structure, links and axe: ${route}`, async ({ page }) => {
     const response = await page.goto(route)
