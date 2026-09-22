@@ -302,15 +302,18 @@ See [Testing and accessibility](docs/TESTING.md) for coverage and review limitat
 | `scripts/` | Content and navigation validation |
 | `tests/` | Browser and component-example checks |
 | `patches/` | Version-specific dependency accessibility fixes |
-| `.github/workflows/` | Continuous integration checks |
+| `.github/workflows/` | Quality checks and GitHub Pages deployment |
 
 Generated builds, search indexes, test reports and local settings are excluded from
 version control. The lockfile is included for reproducible installations.
 
 ## Maintenance and deployment
 
-See [Deployment](docs/DEPLOYMENT.md) for Vercel and Node hosting. The build command
-includes Pagefind indexing; deploying only `.next` omits the search assets in `public`.
+See [Deployment](docs/DEPLOYMENT.md) for GitHub Pages setup and the documentation
+editing workflow, plus alternative Vercel and Node hosting. Successful checks on
+pushes to `main` automatically publish the static site to
+[the playbook website](https://jhodgkins.github.io/Accessibility-PlayBook/).
+The Pages build exports the website and search index to `out/`.
 
 Zod is pinned to 4.3.6 for [Nextra compatibility](https://github.com/shuding/nextra/issues/4989).
 PostCSS and xmldom overrides select patched transitive versions. Review these overrides

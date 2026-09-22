@@ -10,6 +10,12 @@ const withNextra = nextra({
 })
 
 export default withNextra({
+  ...(process.env.PLAYBOOK_PAGES === 'true' && {
+    output: 'export',
+    basePath: '/Accessibility-PlayBook',
+    trailingSlash: true,
+    images: { unoptimized: true }
+  }),
   turbopack: {
     resolveAlias: {
       'next-mdx-import-source-file': './mdx-components.jsx'

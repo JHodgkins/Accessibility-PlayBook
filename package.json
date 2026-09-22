@@ -6,6 +6,8 @@
     "postinstall": "patch-package --error-on-fail",
     "dev": "next",
     "build": "next build && pagefind --site .next/server/app --output-path public/_pagefind",
+    "build:pages": "PLAYBOOK_PAGES=true next build && pagefind --site out --output-path out/_pagefind",
+    "test:pages": "node scripts/check-pages.mjs",
     "start": "next start",
     "lint:content": "node scripts/check-content.mjs",
     "lint": "eslint . && npm run lint:content",
